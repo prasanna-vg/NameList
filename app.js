@@ -6,6 +6,12 @@ var mongoose = require('mongoose');
 require('dotenv').config();
 
 var app = express();
+
+app.use(express.static(path.join(__dirname, '/public')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/index.html'));
+});
+
 const port = process.env.port || 3000;
 
 const dbUrl = process.env.MONGO_URL;
