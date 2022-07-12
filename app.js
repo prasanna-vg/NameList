@@ -7,14 +7,14 @@ require('dotenv').config();
 
 var app = express();
 
-app.use(express.static(path.join(__dirname, '/public')));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/public/index.html'));
-});
+// app.use(express.static(path.join(__dirname, '/public')));
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/public/index.html'));
+// });
 
 const port = process.env.PORT || 3000;
 
-const dbUrl = process.env.MONGO_URL;
+const dbUrl = "mongodb+srv://contactUser:CtxPazc2tUmhPfwL@cluster0.on7ev.mongodb.net/ContactApp?retryWrites=true&w=majority";
 const ConnectionParams = {
     useNewUrlParser: true, useUnifiedTopology: true
 }
@@ -51,3 +51,12 @@ app.get('/',(req,res)=>{
 app.listen(port,()=>{
     console.log("Server started at localhost://3000");
 });
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+    // Set static folder
+    app.use(express.static('client/build'));
+  
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+  }
