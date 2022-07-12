@@ -1,0 +1,31 @@
+<div class="container">
+    <h3>Add Contacts</h3>
+    <form (submit)="addName()">
+        <div class="form-group">
+            <label>First Name</label>
+            <input type="text" [(ngModel)]="first_name" name="first_name" id="" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" [(ngModel)]="last_name" name="last_name" id="" class="form-control">
+        </div>
+        <input type="submit" class="btn btn-success" value="Add">
+    </form>
+</div>
+<hr><hr>
+<div class="container">
+    <div class="row">
+        <div *ngFor = "let name of names">
+            <div class="col-md-3 d-inline">
+                {{name.first_name}}
+            </div>
+            <div class="col-md-3 d-inline">
+                {{name.last_name}}
+            </div>
+            <div class="col-md-3 d-inline float-end p-2">
+                <input type="button" (click)="deleteName(name._id)" value="Delete" class="btn btn-danger">
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
